@@ -1,0 +1,7 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="card">  
+        @await Html.PartialAsync("Events", (IEnumerable<CloudA.Data.Event>)ViewBag.ModelEvents)    
+</div>

@@ -1,0 +1,78 @@
+﻿@model CloudA.Data.Event
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TitlePL)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TitlePL)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TitleEng)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TitleEng)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TitleRos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TitleRos)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateFrom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateFrom)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateTo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateTo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsRegister)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsRegister)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LogoUrl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LogoUrl)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxNumOfPeople)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaxNumOfPeople)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumOfRegistered)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumOfRegistered)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdEvent">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

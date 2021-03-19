@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CloudA.Data.Event>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TitlePL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TitleEng)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TitleRos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRegister)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitlePL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitleEng)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitleRos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRegister)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LogoUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>                               
+                <a asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
