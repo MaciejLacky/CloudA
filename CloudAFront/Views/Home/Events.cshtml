@@ -22,9 +22,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsRegister)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LogoUrl)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Content)
             </th>
@@ -53,7 +51,7 @@
                 @Html.DisplayFor(modelItem => item.IsRegister)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LogoUrl)
+                <img src="/Image/@item.LogoUrl" asp-append-version="true" width="250px" height="250px">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Content)

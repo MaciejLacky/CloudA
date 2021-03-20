@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +26,7 @@ namespace CloudA.Data
         public DateTime DateTo { get; set; }
         [Display(Name = "Czy pokazywać zarejestrowanych?")]
         public bool IsRegister { get; set; }
-        [Display(Name = "Dodaj logo wydarzenia")]
+        
         public string LogoUrl { get; set; }
         [Display(Name = "Maksymalna liczba osób")]
         public int MaxNumOfPeople { get; set; }
@@ -32,6 +34,9 @@ namespace CloudA.Data
         public int NumOfRegistered { get; set; }
         [Display(Name = "Opis wydarzenia")]
         public string Content { get; set; }
+        [NotMapped]
+        [Display(Name ="Dodaj zdjęcie")]
+        public List<IFormFile> ImageFile { get; set; }
         public virtual ICollection<Client> Clients
         {
             get;

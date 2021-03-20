@@ -6,19 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CloudA.Data;
-
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CloudAAdmin.Controllers
 {
     public class EventController : Controller
     {
         private readonly CloudAContext _context;
-       
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public EventController(CloudAContext context)
+        public EventController(CloudAContext context, IWebHostEnvironment hostEnvironment)
         {
-            _context = context;           
-
+            _context = context;
+            this._hostEnvironment = hostEnvironment;
         }
 
         // GET: Event
@@ -58,10 +60,25 @@ namespace CloudAAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEvent,TitlePL,TitleEng,TitleRos,DateFrom,DateTo,IsRegister,LogoUrl,Content")] Event @event)
+        public async Task<IActionResult> Create([Bind("IdEvent,TitlePL,TitleEng,TitleRos,DateFrom,DateTo,IsRegister,LogoUrl,Content,ImageFile")] Event @event)
         {
             if (ModelState.IsValid)
             {
+                var list = @event.ImageFile;
+                foreach (var item in list)
+                {
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(item.FileName);
+                    string extension = Path.GetExtension(item.FileName);
+                    @event.LogoUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await item.CopyToAsync(fileStream);
+                    }
+                }
+               
+
                 _context.Add(@event);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -123,6 +140,8 @@ namespace CloudAAdmin.Controllers
         // GET: Event/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            
+
             if (id == null)
             {
                 return NotFound();
@@ -144,6 +163,12 @@ namespace CloudAAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var @event = await _context.Event.FindAsync(id);
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "image", @event.LogoUrl);
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
+
             _context.Event.Remove(@event);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
