@@ -3,73 +3,74 @@
 @{
     ViewData["Title"] = "Create";
 }
+<div class="container">
+    <form enctype="multipart/form-data" asp-action="Create">
+        <div class="row">
+            <div class="card col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="TitlePL" class="control-label"></label>
+                    <input asp-for="TitlePL" class="form-control" />
+                    <span asp-validation-for="TitlePL" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TitleEng" class="control-label"></label>
+                    <input asp-for="TitleEng" class="form-control" />
+                    <span asp-validation-for="TitleEng" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TitleRos" class="control-label"></label>
+                    <input asp-for="TitleRos" class="form-control" />
+                    <span asp-validation-for="TitleRos" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateFrom" class="control-label"></label>
+                    <input asp-for="DateFrom" class="form-control" />
+                    <span asp-validation-for="DateFrom" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateTo" class="control-label"></label>
+                    <input asp-for="DateTo" class="form-control" />
+                    <span asp-validation-for="DateTo" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsRegister" /> @Html.DisplayNameFor(model => model.IsRegister)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file">                      
+                        <label for="exampleInputFile">File input</label>
+                        <input multiple asp-for="ImageFile" type="file" accept="image/*" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        <small id="fileHelp" class="form-text text-muted">Wybierz zdjęcia opisujące wydarzenie. Możesz wybrać kilka zdjęć</small>
+                    </div>
+                </div>
 
-<h1>Create</h1>
+                <div class="form-group">
+                    <label asp-for="MaxNumOfPeople" class="control-label"></label>
+                    <input asp-for="MaxNumOfPeople" class="form-control" />
+                    <span asp-validation-for="MaxNumOfPeople" class="text-danger"></span>
+                </div>
 
-<h4>Event</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form enctype="multipart/form-data" asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TitlePL" class="control-label"></label>
-                <input asp-for="TitlePL" class="form-control" />
-                <span asp-validation-for="TitlePL" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="TitleEng" class="control-label"></label>
-                <input asp-for="TitleEng" class="form-control" />
-                <span asp-validation-for="TitleEng" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TitleRos" class="control-label"></label>
-                <input asp-for="TitleRos" class="form-control" />
-                <span asp-validation-for="TitleRos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateFrom" class="control-label"></label>
-                <input asp-for="DateFrom" class="form-control" />
-                <span asp-validation-for="DateFrom" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateTo" class="control-label"></label>
-                <input asp-for="DateTo" class="form-control" />
-                <span asp-validation-for="DateTo" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsRegister" /> @Html.DisplayNameFor(model => model.IsRegister)
-                </label>
-            </div>
-            <div class="form-group">
-                <div class="custom-file">
-                    <label class="custom-file-label">Dodaj zdjęcia</label>
-                    <input multiple asp-for="ImageFile" class="form-control custom-file-input" type="file" accept="image/*" />
-                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+            <div class="card col-md-8 ">
+                <div class="form-group">
+                    <label asp-for="Content" for="exampleTextarea">Opis wydarzenia</label>
+                    <textarea asp-for="Content" class="form-control" id="exampleTextarea" rows="23"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <div class="form-group ">
+                    <input type="submit" value="Zapisz" class="btn btn-primary btn-lg float-right  " />
+                    <a class="btn btn-primary btn-lg float-right mr-2 " asp-controller="Home" asp-action="Index">Anuluj</a>
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxNumOfPeople" class="control-label"></label>
-                <input asp-for="MaxNumOfPeople" class="form-control" />
-                <span asp-validation-for="MaxNumOfPeople" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-           
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
     <script>

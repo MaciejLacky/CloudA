@@ -78,3 +78,6 @@ body {
 .btn{
     min-width:80px;
 }
+.card {
+    background-color: #e9ecef;
+}
