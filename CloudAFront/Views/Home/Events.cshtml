@@ -18,10 +18,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateTo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsRegister)
-            </th>
+            </th>           
            
             <th>
                 @Html.DisplayNameFor(model => model.Content)
@@ -47,17 +44,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateTo)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.IsRegister)
+                @Html.DisplayFor(modelItem => item.Content)
             </td>
             <td>
                 <img src="/Image/@item.LogoUrl" asp-append-version="true" width="250px" height="250px">
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>                               
-                <a asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a> 
+                <a asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a>
             </td>
         </tr>
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CloudA.Data.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace CloudA.Data
         public DbSet<Client> Client { get; set; }
 
         public DbSet<Event> Event { get; set; }
+        public DbSet<Images> Image { get; set; }
 
     }
 }

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CloudA.Data.Event>
+
+<p>
+    <a class="btn btn-secondary" asp-controller="Event" asp-action="Create">Dodaj +</a>
+</p>
+<table class="table table-hover table-striped">
+    <thead class=" table-dark">
+        <tr >
+            <th scope="col" class="text-center">
+                @Html.DisplayName("Nazwa")
+            </th>
+            
+            <th scope="col" class="text-center">
+                @Html.DisplayName("Data od:")
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayName("Data do:")
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayName("Pokaż uczestników")
+            </th>
+          
+            <th scope="col" class="text-center">
+                @Html.DisplayName("Max liczba osób")
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayName("Zarejestrowani")
+            </th>  
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr >
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.TitlePL)
+                <br />
+                @Html.DisplayFor(modelItem => item.TitleEng)
+                <br />
+                @Html.DisplayFor(modelItem => item.TitleRos)
+            </td>
+           
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.DateFrom)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.DateTo)
+            </td>
+            <td class="text-center" >
+                @Html.DisplayFor(modelItem => item.IsRegister)
+            </td>
+            
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.MaxNumOfPeople)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.NumOfRegistered)
+            </td>
+            
+            <td>
+
+                <a class="btn btn-primary" asp-controller="Event" asp-action="Edit" asp-route-id="@item.IdEvent">Edit</a> 
+                <a class="btn btn-primary" asp-controller="Event" asp-action="Details" asp-route-id="@item.IdEvent">Details</a> 
+                <a class="btn btn-danger" asp-controller="Event" asp-action="Delete" asp-route-id="@item.IdEvent">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

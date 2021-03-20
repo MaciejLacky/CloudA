@@ -1,25 +1,38 @@
-﻿using CloudAAdmin.Models;
+﻿using CloudA.Data;
+using CloudA.Data.Data;
+using CloudAAdmin.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Topshelf.Runtime;
 
 namespace CloudAAdmin.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly CloudAContext _context;
+       
+        public HomeController(CloudAContext context)
         {
-            _logger = logger;
+            _context = context;
+            
         }
 
         public IActionResult Index()
         {
+            ViewBag.ModelEvents =
+                   (
+                       from events in _context.Event
+                       orderby events.DateFrom
+                       select events
+                   ).ToList();
             return View();
         }
 
@@ -33,5 +46,8 @@ namespace CloudAAdmin.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+       
+
     }
 }

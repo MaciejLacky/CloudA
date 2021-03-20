@@ -57,10 +57,13 @@
     <div class="col-md-8">
         @await Html.PartialAsync("Event", ( CloudA.Data.Event)ViewBag.ModelEvents)
     </div>
+    <div class="row">
+        @await Html.PartialAsync("Images", (IEnumerable<CloudA.Data.Data.Images>)ViewBag.ModelImages)
+    </div>
 </div>
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Home" asp-action="Index">Back to List</a>
 </div>
 

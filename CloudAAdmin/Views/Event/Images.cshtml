@@ -1,0 +1,14 @@
+﻿@model IEnumerable<CloudA.Data.Data.Images>
+
+
+@foreach (var item in Model) {
+    <div class="card col-md-4">
+        <div class="card-img p-2">
+            <img class="img-fluid" src="/Image/@item.PathUrl" asp-append-version="true" >
+        </div>
+    </div>
+        
+    
+                    
+}
+  

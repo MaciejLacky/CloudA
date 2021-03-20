@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CloudA.Data.Data;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,6 +39,11 @@ namespace CloudA.Data
         [Display(Name ="Dodaj zdjęcie")]
         public List<IFormFile> ImageFile { get; set; }
         public virtual ICollection<Client> Clients
+        {
+            get;
+            set;
+        }
+        public virtual ICollection<Images> Images
         {
             get;
             set;

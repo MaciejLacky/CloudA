@@ -9,6 +9,7 @@ using CloudA.Data;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using CloudA.Data.Data;
 
 namespace CloudAAdmin.Controllers
 {
@@ -16,11 +17,14 @@ namespace CloudAAdmin.Controllers
     {
         private readonly CloudAContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
-
+        private List<Images> photosEvent;
+        private Images photoEvent;
         public EventController(CloudAContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             this._hostEnvironment = hostEnvironment;
+            photosEvent = new List<Images>();
+            photoEvent = new Images();
         }
 
         // GET: Event
@@ -34,6 +38,13 @@ namespace CloudAAdmin.Controllers
         // GET: Event/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.ModelImages =
+                  (
+                      from img in _context.Image
+                      where img.IdEvent == id
+                      select img
+                  ).ToList();
+
             if (id == null)
             {
                 return NotFound();
@@ -60,28 +71,44 @@ namespace CloudAAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEvent,TitlePL,TitleEng,TitleRos,DateFrom,DateTo,IsRegister,LogoUrl,Content,ImageFile")] Event @event)
+        public async Task<IActionResult> Create([Bind("IdEvent,TitlePL,TitleEng,TitleRos,DateFrom,DateTo,IsRegister,LogoUrl,Content,MaxNumOfPeople,ImageFile")] Event @event)
         {
             if (ModelState.IsValid)
             {
+               
                 var list = @event.ImageFile;
                 foreach (var item in list)
                 {
+                    //_hostEnvironment.WebRootPath
+
                     string wwwRootPath = _hostEnvironment.WebRootPath;
                     string fileName = Path.GetFileNameWithoutExtension(item.FileName);
                     string extension = Path.GetExtension(item.FileName);
-                    @event.LogoUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string pathUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    @event.LogoUrl = pathUrl;
+                    photoEvent.PathUrl = pathUrl;
+                    photosEvent.Add(new Images { PathUrl =pathUrl });
                     string path = Path.Combine(wwwRootPath + "/Image/", fileName);
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await item.CopyToAsync(fileStream);
                     }
+                   
                 }
                
 
                 _context.Add(@event);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var previousIdFromDataBase = _context.Event.OrderBy(x => x.IdEvent).LastOrDefault().IdEvent;
+                foreach (var item in photosEvent)
+                {
+                    item.IdEvent = previousIdFromDataBase;
+                    
+                    
+                }
+                _context.Image.AddRange(photosEvent);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
             }
             return View(@event);
         }
@@ -132,7 +159,7 @@ namespace CloudAAdmin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(@event);
         }
@@ -171,7 +198,10 @@ namespace CloudAAdmin.Controllers
 
             _context.Event.Remove(@event);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            var removeImages = _context.Image.All(x => x.IdEvent == id);
+           
+            return RedirectToAction("Index","Home");
         }
 
         private bool EventExists(int id)

@@ -4,14 +4,16 @@ using CloudA.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CloudA.Data.Migrations
 {
     [DbContext(typeof(CloudAContext))]
-    partial class CloudAContextModelSnapshot : ModelSnapshot
+    [Migration("20210320113824_m5")]
+    partial class m5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,7 +87,7 @@ namespace CloudA.Data.Migrations
 
                     b.HasIndex("EventIdEvent");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("CloudA.Data.Event", b =>

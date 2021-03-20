@@ -48,8 +48,14 @@ namespace CloudAFront.Controllers
         public IActionResult Create(int id)
         {
             ViewBag.ModelEvents = _context.Event.FirstOrDefault(x => x.IdEvent == id);
-                
-           
+            ViewBag.ModelImages =
+                 (
+                     from img in _context.Image
+                     where img.IdEvent == id
+                     select img
+                 ).ToList();
+
+
             //ViewData["IdEvent"] = id;
             return View();
         }
@@ -69,7 +75,7 @@ namespace CloudAFront.Controllers
                 client.IdEvent = id;
                 _context.Add(client);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(client);
         }
@@ -120,7 +126,7 @@ namespace CloudAFront.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(client);
         }
@@ -151,7 +157,7 @@ namespace CloudAFront.Controllers
             var client = await _context.Client.FindAsync(id);
             _context.Client.Remove(client);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
         private bool ClientExists(int id)
