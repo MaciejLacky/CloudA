@@ -112,6 +112,7 @@ namespace CloudAFront.Controllers
             {
                 try
                 {
+
                     _context.Update(client);
                     await _context.SaveChangesAsync();
                 }

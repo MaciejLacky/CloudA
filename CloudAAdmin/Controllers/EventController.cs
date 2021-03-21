@@ -273,22 +273,34 @@ namespace CloudAAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var @event = await _context.Event.FindAsync(id);
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "image", @event.LogoUrl);
-            if (System.IO.File.Exists(imagePath))
-            {
-                System.IO.File.Delete(imagePath);
-            }
-
-            _context.Event.Remove(@event);
-            await _context.SaveChangesAsync();
 
             //delete images from Image database with id == idEvent
-
-            foreach (var item in _context.Image.Where(x => x.IdEvent == id))
-            {                
-                _context.Image.Remove(item);
+            if (@event.ImageFile != null)
+            {
+                var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "image", @event.LogoUrl);
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+                foreach (var item in _context.Image.Where(x => x.IdEvent == id))
+                {
+                    _context.Image.Remove(item);
+                }
+                await _context.SaveChangesAsync();
+            }
+            //delete client from database with id = idEvent
+            var isThereClients = _context.Client.Any(x => x.IdEvent == id);
+            if (isThereClients)
+            {
+                foreach (var item in _context.Client.Where(x => x.IdEvent == id))
+                {
+                    _context.Client.Remove(item);
+                }
+                await _context.SaveChangesAsync();
             }
 
+           
+            _context.Event.Remove(@event);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index","Home");
