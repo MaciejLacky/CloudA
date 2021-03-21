@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CloudA.Data.Event>
 
 <p>
-    <a class="btn btn-secondary" asp-controller="Event" asp-action="Create">Dodaj +</a>
+    <a class="btn btn-secondary btn-lg" asp-controller="Event" asp-action="Create">Dodaj +</a>
 </p>
 <table class="table table-hover table-striped">
     <thead class=" table-dark">
@@ -58,10 +58,9 @@
             </td>
             
             <td>
-
-                <a class="btn btn-primary" asp-controller="Event" asp-action="Edit" asp-route-id="@item.IdEvent">Edit</a> 
-                <a class="btn btn-primary" asp-controller="Event" asp-action="Details" asp-route-id="@item.IdEvent">Details</a> 
-                <a class="btn btn-danger" asp-controller="Event" asp-action="Delete" asp-route-id="@item.IdEvent">Delete</a>
+                <a class="btn btn-sm btn-warning mr-3 mt-1 float-right" asp-controller="Event" asp-action="Delete" asp-route-id="@item.IdEvent">Usuń</a>
+                <a class="btn btn-sm btn-secondary mr-3 mt-1 float-right" asp-controller="Event" asp-action="Edit" asp-route-id="@item.IdEvent">Edytuj</a>
+                <a class="btn btn-sm btn-secondary mr-3 mt-1 float-right" asp-controller="Event" asp-action="Clients" asp-route-id="@item.IdEvent">Uczestnicy</a>
             </td>
         </tr>
 }

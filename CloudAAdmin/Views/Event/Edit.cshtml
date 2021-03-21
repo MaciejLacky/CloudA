@@ -4,69 +4,84 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Event</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdEvent" />
-            <div class="form-group">
-                <label asp-for="TitlePL" class="control-label"></label>
-                <input asp-for="TitlePL" class="form-control" />
-                <span asp-validation-for="TitlePL" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TitleEng" class="control-label"></label>
-                <input asp-for="TitleEng" class="form-control" />
-                <span asp-validation-for="TitleEng" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TitleRos" class="control-label"></label>
-                <input asp-for="TitleRos" class="form-control" />
-                <span asp-validation-for="TitleRos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateFrom" class="control-label"></label>
-                <input asp-for="DateFrom" class="form-control" />
-                <span asp-validation-for="DateFrom" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateTo" class="control-label"></label>
-                <input asp-for="DateTo" class="form-control" />
-                <span asp-validation-for="DateTo" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsRegister" /> @Html.DisplayNameFor(model => model.IsRegister)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="LogoUrl" class="control-label"></label>
-                <input asp-for="LogoUrl" class="form-control" />
-                <span asp-validation-for="LogoUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxNumOfPeople" class="control-label"></label>
-                <input asp-for="MaxNumOfPeople" class="form-control" />
-                <span asp-validation-for="MaxNumOfPeople" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<div class="container">
+    <form enctype="multipart/form-data" asp-action="Edit">
+        <div class="row">
+            <div class="card col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdEvent" />
+                <input type="hidden" asp-for="NumOfRegistered" />
+                <div class="form-group">
+                    <label asp-for="TitlePL" class="control-label"></label>
+                    <input asp-for="TitlePL" class="form-control" />
+                    <span asp-validation-for="TitlePL" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TitleEng" class="control-label"></label>
+                    <input asp-for="TitleEng" class="form-control" />
+                    <span asp-validation-for="TitleEng" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TitleRos" class="control-label"></label>
+                    <input asp-for="TitleRos" class="form-control" />
+                    <span asp-validation-for="TitleRos" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateFrom" class="control-label"></label>
+                    <input asp-for="DateFrom" class="form-control" />
+                    <span asp-validation-for="DateFrom" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateTo" class="control-label"></label>
+                    <input asp-for="DateTo" class="form-control" />
+                    <span asp-validation-for="DateTo" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsRegister" /> @Html.DisplayNameFor(model => model.IsRegister)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <label for="exampleInputFile">File input</label>
+                        <input multiple asp-for="ImageFile" type="file" accept="image/*" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        <small id="fileHelp" class="form-text text-muted">Wybierz zdjęcia opisujące wydarzenie. Możesz wybrać kilka zdjęć</small>
+                    </div>
+                </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                <div class="form-group">
+                    <label asp-for="MaxNumOfPeople" class="control-label"></label>
+                    <input asp-for="MaxNumOfPeople" class="form-control" />
+                    <span asp-validation-for="MaxNumOfPeople" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="card col-md-8 ">
+                <div class="form-group">
+                    <label asp-for="Content" for="exampleTextarea">Opis wydarzenia</label>
+                    <textarea asp-for="Content" class="form-control" id="exampleTextarea" rows="23"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <div class="form-group ">
+
+                    <input type="submit" value="Zapisz" class="btn btn-secondary btn-lg float-right  " />
+                    <a class="btn btn-secondary btn-lg float-right mr-2 " asp-controller="Home" asp-action="Index">Anuluj</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="titleAdmin mt-3 col-12">
+                <h3>
+                    Wybrane zdjęcia do wydarzenia
+                </h3>
+            </div>
+        </div>
+        <div class="body-titleAdmin d-flex">
+            @await Html.PartialAsync("Images", (IEnumerable<CloudA.Data.Data.Images>)ViewBag.ModelImages)
+        </div>
+    </form>
 </div>
 
 @section Scripts {

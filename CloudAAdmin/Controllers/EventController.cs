@@ -34,6 +34,19 @@ namespace CloudAAdmin.Controllers
 
             return View(await _context.Event.ToListAsync());
         }
+        // GET: Event/Clients/5
+        public async Task<IActionResult> Clients(int? id)
+        {
+           
+            var @event = await _context.Client
+                .Where(m => m.IdEvent == id).ToListAsync();
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            return View(@event);
+        }
 
         // GET: Event/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -75,39 +88,49 @@ namespace CloudAAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-               
-                var list = @event.ImageFile;
-                foreach (var item in list)
+                //creating path to upload multiple images in database
+                if (@event.ImageFile != null)
                 {
-                    //_hostEnvironment.WebRootPath
-
-                    string wwwRootPath = _hostEnvironment.WebRootPath;
-                    string fileName = Path.GetFileNameWithoutExtension(item.FileName);
-                    string extension = Path.GetExtension(item.FileName);
-                    string pathUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    @event.LogoUrl = pathUrl;
-                    photoEvent.PathUrl = pathUrl;
-                    photosEvent.Add(new Images { PathUrl =pathUrl });
-                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    var list = @event.ImageFile;
+                    foreach (var item in list)
                     {
-                        await item.CopyToAsync(fileStream);
+                        //_hostEnvironment.WebRootPath
+
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(item.FileName);
+                        string extension = Path.GetExtension(item.FileName);
+                        string pathUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        @event.LogoUrl = pathUrl;
+                        photoEvent.PathUrl = pathUrl;
+                        photosEvent.Add(new Images { PathUrl = pathUrl });
+                        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await item.CopyToAsync(fileStream);
+                        }
+
                     }
+
+
+                    _context.Add(@event);
+                    await _context.SaveChangesAsync();
+                    var previousIdFromDataBase = _context.Event.OrderBy(x => x.IdEvent).LastOrDefault().IdEvent;
+                    foreach (var item in photosEvent)
+                    {
+                        item.IdEvent = previousIdFromDataBase;
+
+
+                    }
+                    _context.Image.AddRange(photosEvent);
                    
                 }
+                else
+                {
+                    _context.Add(@event);
+                    await _context.SaveChangesAsync();
+                }
                
 
-                _context.Add(@event);
-                await _context.SaveChangesAsync();
-                var previousIdFromDataBase = _context.Event.OrderBy(x => x.IdEvent).LastOrDefault().IdEvent;
-                foreach (var item in photosEvent)
-                {
-                    item.IdEvent = previousIdFromDataBase;
-                    
-                    
-                }
-                _context.Image.AddRange(photosEvent);
-                await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
             return View(@event);
@@ -116,6 +139,12 @@ namespace CloudAAdmin.Controllers
         // GET: Event/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.ModelImages =
+                 (
+                     from img in _context.Image
+                     where img.IdEvent == id
+                     select img
+                 ).ToList();
             if (id == null)
             {
                 return NotFound();
@@ -134,7 +163,7 @@ namespace CloudAAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEvent,TitlePL,TitleEng,TitleRos,DateFrom,DateTo,IsRegister,LogoUrl,Content")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("IdEvent,TitlePL,TitleEng,TitleRos,DateFrom,DateTo,IsRegister,LogoUrl,Content,MaxNumOfPeople,ImageFile,NumOfRegistered")] Event @event)
         {
             if (id != @event.IdEvent)
             {
@@ -159,9 +188,63 @@ namespace CloudAAdmin.Controllers
                         throw;
                     }
                 }
+
+                //creating path to upload multiple images in database
+                if (@event.ImageFile != null)
+                {
+                    var list = @event.ImageFile;
+                    foreach (var item in list)
+                    {
+                        //_hostEnvironment.WebRootPath
+
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(item.FileName);
+                        string extension = Path.GetExtension(item.FileName);
+                        string pathUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        @event.LogoUrl = pathUrl;
+                        photoEvent.PathUrl = pathUrl;
+                        photosEvent.Add(new Images { PathUrl = pathUrl });
+                        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await item.CopyToAsync(fileStream);
+                        }
+
+                    }
+
+                    _context.Update(@event);
+                    
+                    var previousIdFromDataBase = id;
+                    foreach (var item in photosEvent)
+                    {
+                        item.IdEvent = previousIdFromDataBase;
+
+
+                    }
+                    _context.Image.AddRange(photosEvent);
+                    await _context.SaveChangesAsync();
+                }
+               
+
                 return RedirectToAction("Index", "Home");
             }
             return View(@event);
+        }
+
+        public async Task<IActionResult> DeleteImage(int? id)
+        {
+
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var @event = await _context.Image
+                .FirstOrDefaultAsync(m => m.IdImages == id);
+            _context.Image.Remove(@event);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Event/Delete/5
@@ -199,8 +282,15 @@ namespace CloudAAdmin.Controllers
             _context.Event.Remove(@event);
             await _context.SaveChangesAsync();
 
-            var removeImages = _context.Image.All(x => x.IdEvent == id);
-           
+            //delete images from Image database with id == idEvent
+
+            foreach (var item in _context.Image.Where(x => x.IdEvent == id))
+            {                
+                _context.Image.Remove(item);
+            }
+
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("Index","Home");
         }
 

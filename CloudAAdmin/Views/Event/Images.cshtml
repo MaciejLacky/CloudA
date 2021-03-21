@@ -1,14 +1,44 @@
 ﻿@model IEnumerable<CloudA.Data.Data.Images>
 
 
-@foreach (var item in Model) {
-    <div class="card col-md-4">
-        <div class="card-img p-2">
-            <img class="img-fluid" src="/Image/@item.PathUrl" asp-append-version="true" >
+@foreach (var item in Model)
+{
+    <div class="card">
+        <div class="card-img-top">
+            <img class=" rounded img-admin" src="/Image/@item.PathUrl" asp-append-version="true">
         </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-sm float-right ml-3" data-toggle="modal" data-target=".bd-example-modal-xl">Zobacz</button>
+            <button type="button" class="btn btn-warning btn-sm float-right" data-toggle="modal" data-target=".bd-example-modal-x2">Usuń</button>
+
+            <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <img class=" rounded img-admin-modal" src="/Image/@item.PathUrl" asp-append-version="true">
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade bd-example-modal-x2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="alert  alert-warning">
+                            <h3>Czy napewno usunąć wybrane zdjęcie ? </h3>
+                            <p class="mb-0">Usunięcie wydarzenia jest procesem nieodwracalnym</p>
+                        </div>
+                        <div>
+                            <div class="modal-footer">
+                                <a class="btn btn-warning  float-right m-2 " asp-controller="Event" asp-action="DeleteImage" asp-route-id="@item.IdImages">Usuń</a>
+                                <a class="btn btn-secondary  float-right m-2  " asp-controller="Home" asp-action="Index">Anuluj</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-        
-    
-                    
 }
-  
+
+
+
+

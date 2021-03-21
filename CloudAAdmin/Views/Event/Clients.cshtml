@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CloudA.Data.Client>
+
+<table class="table table-hover table-striped">
+    <thead class=" table-dark">
+        <tr>
+            <th scope="col" class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayNameFor(model => model.School)
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayNameFor(model => model.permission1)
+            </th>
+            <th scope="col" class="text-center">
+                @Html.DisplayNameFor(model => model.permission2)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.School)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.permission1)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.permission2)
+            </td>  
+        </tr>
+}
+    </tbody>
+</table>
+<div class="col-12">
+    <a class="btn btn-secondary btn-lg float-right mr-2 " asp-controller="Home" asp-action="Index">Powrót</a>
+</div>

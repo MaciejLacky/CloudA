@@ -70,7 +70,10 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-/*Custom classes*/
+
+
+
+/*Own classes*/
 
 .container{
    max-width: 1400px;
@@ -81,3 +84,31 @@ body {
 .card {
     background-color: #e9ecef;
 }
+.titleAdmin {
+    /*padding: .75rem 1.25rem;*/
+    margin-bottom: 0;
+    background-color: #e9ecef;
+    border-top: 1px solid rgba(0,0,0,.125);
+    border-left: 1px solid rgba(0,0,0,.125);
+    border-right: 1px solid rgba(0,0,0,.125);
+}
+.body-titleAdmin {
+    display: flex;
+    padding: 0;
+    margin-right: -15px;
+    margin-left: -15px;
+    background-color: #e9ecef;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-left: 1px solid rgba(0,0,0,.125);
+    border-right: 1px solid rgba(0,0,0,.125);
+}
+.img-admin{
+    height: 250px;
+    width: 250px;
+    margin: 5px;
+}
+.img-admin.modal{
+    max-height: 600px;
+    max-width: 800px;
+}
+
