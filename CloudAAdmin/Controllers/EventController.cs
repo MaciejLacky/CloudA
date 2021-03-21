@@ -89,9 +89,9 @@ namespace CloudAAdmin.Controllers
             if (ModelState.IsValid)
             {
                 //creating path to upload multiple images in database
+                var list = @event.ImageFile;
                 if (@event.ImageFile != null)
-                {
-                    var list = @event.ImageFile;
+                { 
                     foreach (var item in list)
                     {
                         //_hostEnvironment.WebRootPath
@@ -110,19 +110,15 @@ namespace CloudAAdmin.Controllers
                         }
 
                     }
-
-
                     _context.Add(@event);
                     await _context.SaveChangesAsync();
                     var previousIdFromDataBase = _context.Event.OrderBy(x => x.IdEvent).LastOrDefault().IdEvent;
                     foreach (var item in photosEvent)
                     {
                         item.IdEvent = previousIdFromDataBase;
-
-
                     }
                     _context.Image.AddRange(photosEvent);
-                   
+                    await _context.SaveChangesAsync();
                 }
                 else
                 {
@@ -130,7 +126,6 @@ namespace CloudAAdmin.Controllers
                     await _context.SaveChangesAsync();
                 }
                
-
                 return RedirectToAction("Index", "Home");
             }
             return View(@event);
