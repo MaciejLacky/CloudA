@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <div class="card shadow mb-5">
+        <div class="card shadow mb-3">
             <div class="card border-light">
                 <div class="card-body">
                     <form asp-action="Create">
@@ -47,18 +47,44 @@
                         <div class="form-group form-check">
                             <label class="form-check-label">
                                 <input class="form-check-input" asp-for="permission1" /> @Html.DisplayNameFor(model => model.permission1)
+                                <a data-toggle="modal" data-target=".bd-example-modal-xl1"><small>(Przeczytaj pełną treść)</small></a>
                             </label>
                         </div>
                         <div class="form-group form-check">
                             <label class="form-check-label">
                                 <input class="form-check-input" asp-for="permission2" /> @Html.DisplayNameFor(model => model.permission2)
+                                <a  data-toggle="modal" data-target=".bd-example-modal-xl2"><small>(Przeczytaj pełną treść)</small></a>
                             </label>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Zapisz" class="btn btn-lg btn-primary float-right ml-3" />
-                            <a class="btn btn-lg btn-primary float-right" asp-controller="Home" asp-action="Index">Anuluj</a>
+                            <a class="btn btn-lg btn-primary float-right " asp-controller="Home" asp-action="Index">Anuluj</a>
                         </div>
                     </form>
+                    <div class="modal fade bd-example-modal-xl1 p-2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl ">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <strong>Administratorem Pani/Pana danych osobowych pozyskiwanych i przetwarzanych w związku z prowadzoną rekrutacją na studia, danych przetwarzanych w związku z podjęciem nauki oraz danych przetwarzanych w ramach serwisu www.wsb-nlu.edu.pl oraz serwisu www.wsb-nlu.clouda.edu.pl (dalej łącznie jako „Serwis”), w tym wszelkich ich podstron jest Wyższa Szkoła Biznesu - National Louis University z siedzibą w Nowym Sączu ul. Zielona 27, 33- 300 Nowy Sącz, NIP: 734-10-03-635, REGON: 490028409 (dalej jako „Administrator”). Możecie Państwo skontaktować się z nami przez adres e-mail: rektorat@wsb-nlu.edu.pl, telefonicznie pod numerem: +48 (18) 44 99 111 lub listownie na adres siedziby.</strong>
+                                </div>                              
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade bd-example-modal-xl2 p-2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <strong>Administratorem Pani/Pana danych osobowych pozyskiwanych i przetwarzanych w związku z prowadzoną rekrutacją na studia, danych przetwarzanych w związku z podjęciem nauki oraz danych przetwarzanych w ramach serwisu www.wsb-nlu.edu.pl oraz serwisu www.wsb-nlu.clouda.edu.pl (dalej łącznie jako „Serwis”), w tym wszelkich ich podstron jest Wyższa Szkoła Biznesu - National Louis University z siedzibą w Nowym Sączu ul. Zielona 27, 33- 300 Nowy Sącz, NIP: 734-10-03-635, REGON: 490028409 (dalej jako „Administrator”). Możecie Państwo skontaktować się z nami przez adres e-mail: rektorat@wsb-nlu.edu.pl, telefonicznie pod numerem: +48 (18) 44 99 111 lub listownie na adres siedziby.</strong>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,7 +92,7 @@
     <div class="col-md-8">
         @await Html.PartialAsync("Event", (CloudA.Data.Event)ViewBag.ModelEvents)
     </div>
-    <div class="row my-5 body-titleFront">
+    <div class="row body-titleFront">
         <div class="shadow col-12 d-md-flex rounded">
 
             @await Html.PartialAsync("Images", (IEnumerable<CloudA.Data.Data.Images>)ViewBag.ModelImages)
