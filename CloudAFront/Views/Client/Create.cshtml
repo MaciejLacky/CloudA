@@ -6,64 +6,72 @@
     
 }
 
-<h1>Create</h1>
-
-<h4>Client</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" />
-                <span asp-validation-for="Surname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="School" class="control-label"></label>
-                <input asp-for="School" class="form-control" />
-                <span asp-validation-for="School" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="permission1" /> @Html.DisplayNameFor(model => model.permission1)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="permission2" /> @Html.DisplayNameFor(model => model.permission2)
-                </label>
-            </div>           
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-    <div class="col-md-8">
-        @await Html.PartialAsync("Event", ( CloudA.Data.Event)ViewBag.ModelEvents)
-    </div>
-    <div class="row">
-        @await Html.PartialAsync("Images", (IEnumerable<CloudA.Data.Data.Images>)ViewBag.ModelImages)
-    </div>
+<div class="titleFront mt-3 mb-3 shadow col-12">
+    <h3>
+        Wypełnij formularz
+    </h3>
 </div>
 
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow mb-5">
+            <div class="card border-light">
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Surname" class="control-label"></label>
+                            <input asp-for="Surname" class="form-control" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="City" class="control-label"></label>
+                            <input asp-for="City" class="form-control" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="School" class="control-label"></label>
+                            <input asp-for="School" class="form-control" />
+                            <span asp-validation-for="School" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="permission1" /> @Html.DisplayNameFor(model => model.permission1)
+                            </label>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="permission2" /> @Html.DisplayNameFor(model => model.permission2)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Zapisz" class="btn btn-lg btn-primary float-right ml-3" />
+                            <a class="btn btn-lg btn-primary float-right" asp-controller="Home" asp-action="Index">Anuluj</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        @await Html.PartialAsync("Event", (CloudA.Data.Event)ViewBag.ModelEvents)
+    </div>
+    <div class="row my-5 body-titleFront">
+        <div class="shadow col-12 d-md-flex rounded">
 
-<div>
-    <a asp-controller="Home" asp-action="Index">Back to List</a>
+            @await Html.PartialAsync("Images", (IEnumerable<CloudA.Data.Data.Images>)ViewBag.ModelImages)
+        </div>
+    </div>
+    
 </div>
 

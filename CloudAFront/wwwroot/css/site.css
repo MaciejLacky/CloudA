@@ -69,3 +69,44 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/*own classes*/
+.container {
+    max-width: 1400px;
+}
+
+.btn {
+    min-width: 80px;
+}
+
+.img-front-list {
+    max-width: 250px;
+    max-height: 200px;
+}
+.card {
+    border-radius: 5px;
+}
+.titleFront {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #1b6ec2;
+    border: 1px solid rgba(0,0,0,.125);
+    color:white;
+}
+.body-titleFront {
+    
+    padding: 0;
+    margin-right: 15px;
+    margin-left: 15px;
+    
+}
+.img-front {
+    height: 250px;
+    width: 250px;
+    margin: 5px;
+}
+
+    .img-front.modal {
+        max-height: 600px;
+        max-width: 800px;
+    }

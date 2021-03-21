@@ -3,10 +3,40 @@
 
 @foreach (var item in Model)
 {
-    <div class="card col-md-4">
-        <div class="card-img p-2">
-            <img class="img-fluid" src="/Image/@item.PathUrl" asp-append-version="true">
+   
+    <div class="card m-3 ">
+        <div class="card-img-top">
+            <img class=" rounded img-front img-fluid" src="/Image/@item.PathUrl" asp-append-version="true">
         </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary btn-sm float-right ml-3" data-toggle="modal" data-target=".bd-example-modal-xl">Zobacz</button>
+           
+
+            <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <img class=" rounded img-front-modal "  src="/Image/@item.PathUrl" asp-append-version="true">
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade bd-example-modal-x2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="alert  alert-warning">
+                            <h3>Czy napewno usunąć wybrane zdjęcie ? </h3>
+                            <p class="mb-0">Usunięcie wydarzenia jest procesem nieodwracalnym</p>
+                        </div>
+                        <div>
+                            <div class="modal-footer">
+                                
+                                <a class="btn btn-primary  float-right m-2  " asp-controller="Home" asp-action="Index">Anuluj</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
