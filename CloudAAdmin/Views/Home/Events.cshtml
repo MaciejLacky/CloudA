@@ -1,68 +1,93 @@
 ﻿@model IEnumerable<CloudA.Data.Event>
 
-<p>
-    <a class="btn btn-secondary btn-lg" asp-controller="Event" asp-action="Create">Dodaj +</a>
-</p>
-<table class="table table-hover table-striped">
-    <thead class=" table-dark">
-        <tr >
-            <th scope="col" class="text-center">
-                @Html.DisplayName("Nazwa")
-            </th>
+<div class="row col-12 mt-3">
+    <p>
+        <a class="btn btn-secondary btn-lg" asp-controller="Event" asp-action="Create">Dodaj +</a>
+    </p>
+</div>
+<div class="row">
+    <div class="col-5">
+        <form asp-action="ShowEditItem" asp-controller="Home">
+            <table class="table table-hover table-striped" style="width:98%">
+                <thead class=" table-dark">
+                    <tr>
+                        <th></th>
+                        <th scope="col" class="text-center">
+                            @Html.DisplayName("Nazwa")
+                        </th>
+
+                        <th scope="col" class="text-center">
+                            @Html.DisplayName("Data od:")
+                        </th>
+                        <th scope="col" class="text-center">
+                            @Html.DisplayName("Data do:")
+                        </th>
+                        <th scope="col" class="text-center">
+                            @Html.DisplayName("Pokaż uczestników")
+                        </th>
+
+                        <th scope="col" class="text-center">
+                            @Html.DisplayName("Max liczba osób")
+                        </th>
+                        <th scope="col" class="text-center">
+                            @Html.DisplayName("Zarejestrowani")
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <input class="editItemRadio" type="radio" name="Id" id="Id" value="@item.IdEvent" />
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.TitlePL)
+                                <br />
+                                @Html.DisplayFor(modelItem => item.TitleEng)
+                                <br />
+                                @Html.DisplayFor(modelItem => item.TitleRos)
+                            </td>
+
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.DateFrom)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.DateTo)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.IsRegister)
+                            </td>
+
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.MaxNumOfPeople)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.NumOfRegistered)
+                            </td>
+
+                            <td>
+                                <a class="btn btn-sm btn-warning mr-3 mt-1 float-right" asp-controller="Event" asp-action="Delete" asp-route-id="@item.IdEvent">Usuń</a>
+                                <a class="btn btn-sm btn-secondary mr-3 mt-1 float-right" asp-controller="Event" asp-action="Edit" asp-route-id="@item.IdEvent">Edytuj</a>
+                                <a class="btn btn-sm btn-secondary mr-3 mt-1 float-right" asp-controller="Event" asp-action="Clients" asp-route-id="@item.IdEvent">Uczestnicy</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
             
-            <th scope="col" class="text-center">
-                @Html.DisplayName("Data od:")
-            </th>
-            <th scope="col" class="text-center">
-                @Html.DisplayName("Data do:")
-            </th>
-            <th scope="col" class="text-center">
-                @Html.DisplayName("Pokaż uczestników")
-            </th>
-          
-            <th scope="col" class="text-center">
-                @Html.DisplayName("Max liczba osób")
-            </th>
-            <th scope="col" class="text-center">
-                @Html.DisplayName("Zarejestrowani")
-            </th>  
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr >
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.TitlePL)
-                <br />
-                @Html.DisplayFor(modelItem => item.TitleEng)
-                <br />
-                @Html.DisplayFor(modelItem => item.TitleRos)
-            </td>
-           
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.DateFrom)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.DateTo)
-            </td>
-            <td class="text-center" >
-                @Html.DisplayFor(modelItem => item.IsRegister)
-            </td>
-            
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.MaxNumOfPeople)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.NumOfRegistered)
-            </td>
-            
-            <td>
-                <a class="btn btn-sm btn-warning mr-3 mt-1 float-right" asp-controller="Event" asp-action="Delete" asp-route-id="@item.IdEvent">Usuń</a>
-                <a class="btn btn-sm btn-secondary mr-3 mt-1 float-right" asp-controller="Event" asp-action="Edit" asp-route-id="@item.IdEvent">Edytuj</a>
-                <a class="btn btn-sm btn-secondary mr-3 mt-1 float-right" asp-controller="Event" asp-action="Clients" asp-route-id="@item.IdEvent">Uczestnicy</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        </form>
+    </div>
+
+    <div class="col-5 offset-2 pl-3" id="EditFormArea">
+
+    </div>
+</div>
+
+
+
+
+
+
+
