@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CloudAAdmin</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -29,10 +31,16 @@
             </div>
         </nav>
     </header>
+    <div id="mySidenav" class="sidenav">
+        <a asp-area="" asp-controller="Home" asp-action="Index"  id="about"><i class="fa fa-home"></i></a>
+        <a asp-area="" asp-controller="Event" asp-action="Index"  id="blog"><i class="fa fa-edit"></i></a>
+        <a asp-area="" asp-controller="Home" asp-action="Index"  id="projects"><i class="fa fa-home"></i></a>
+        <a asp-area="" asp-controller="Home" asp-action="Index"  id="contact"><i class="fa fa-edit"></i></a>
+    </div>
     <div class="container">
-        
-            @RenderBody()
-       
+
+        @RenderBody()
+
     </div>
 
     <footer class="border-top footer text-muted">
@@ -43,6 +51,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required:false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

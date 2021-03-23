@@ -82,13 +82,15 @@ body {
 .container{
    max-width: 1400px;
 }
-.btn{
-    min-width:80px;
+.btn {
+    min-width: 80px;
+    background-color: #3F51B5;
 }
 .card {
     background-color: white;
     border-radius: 15px;
     border-color: none;
+    
 }
 .titleAdmin {
     /*padding: .75rem 1.25rem;*/
@@ -118,17 +120,20 @@ body {
 .collapsible {
     cursor: pointer;
     padding: 5px;
-    width: 10%;
+    width: 5%;
     border-radius: 15px;
     border-color: none;
-    text-align: left;
+    text-align: center;
     outline: none;
     font-size: 15px;
     color: white;
+    background-color: #3F51B5;
 }
 .btn-link-own {
     margin-top:5px;
-    width: 30%;
+    width: 50%;
+    vertical-align:central;
+    
 }
 
 .btn-sm {
@@ -149,5 +154,74 @@ body {
     background-color: white;
     position:relative;
     border:none;
+}
+.btn-icon {
+    background-color: #3F51B5; /* Blue background */
+    border: none; /* Remove borders */
+    margin: 2px;
+    color: white; /* White text */
+    padding: 6px 8px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-radius: 5px;
+}
+
+    /* Darker background on mouse-over */
+    .btn-icon:hover {
+        background-color: RoyalBlue;
+    }
+.btn-first {
+    cursor: pointer;
+    padding: 5px;
+    width: 5%;
+    border-radius: 15px;
+    border-color: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    color: white;
+    background-color: #3F51B5;
+}
+#mySidenav a {
+    margin-top: 20px;
+    position: absolute;
+    left: -60px;
+    transition: 0.3s;
+    padding: 15px;
+    width: 100px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    text-align: right;
+   
+}
+
+    #mySidenav a:hover {
+        left: 0;
+    }
+
+#about {
+    top: 20px;
+    background-color: #555;
+   
+}
+
+#blog {
+    top: 80px;
+    background-color: #555;
+    
+}
+
+#projects {
+    top: 140px;
+    background-color: #555;
+    
+}
+
+#contact {
+    top: 200px;
+    background-color: #555 ;
+   
 }
 
