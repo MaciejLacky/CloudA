@@ -92,75 +92,75 @@ namespace CloudAAdmin.Controllers
             Event @event = _context.Event.FirstOrDefault(x => x.IdEvent == id);
             return PartialView(@event);
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ShowEditItem(int id, [Bind("IdEvent,TitlePL,TitleEng,TitleRos,DateFrom,DateTo,IsRegister,LogoUrl,Content,MaxNumOfPeople,ImageFile,NumOfRegistered")] Event @event)
-        //{
-        //    if (id != @event.IdEvent)
-        //    {
-        //        return NotFound();
-        //    }
+      
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ShowEditItemm(int id, [Bind("IdEvent,TitlePL,TitleEng,TitleRos,DateFrom,DateTo,IsRegister,LogoUrl,Content,MaxNumOfPeople,ImageFile,NumOfRegistered")] Event @event)
+        {
+            //if (id != @event.IdEvent)
+            //{
+            //    return NotFound();
+            //}
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(@event);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!EventExists(@event.IdEvent))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(@event);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EventExists(@event.IdEvent))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
 
-        //        //creating path to upload multiple images in database
-        //        if (@event.ImageFile != null)
-        //        {
-        //            var list = @event.ImageFile;
-        //            foreach (var item in list)
-        //            {
-        //                //_hostEnvironment.WebRootPath
+                //creating path to upload multiple images in database
+                if (@event.ImageFile != null)
+                {
+                    var list = @event.ImageFile;
+                    foreach (var item in list)
+                    {
+                        //_hostEnvironment.WebRootPath
 
-        //                string wwwRootPath = _hostEnvironment.WebRootPath;
-        //                string fileName = Path.GetFileNameWithoutExtension(item.FileName);
-        //                string extension = Path.GetExtension(item.FileName);
-        //                string pathUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-        //                @event.LogoUrl = pathUrl;
-        //                photoEvent.PathUrl = pathUrl;
-        //                photosEvent.Add(new Images { PathUrl = pathUrl });
-        //                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-        //                using (var fileStream = new FileStream(path, FileMode.Create))
-        //                {
-        //                    await item.CopyToAsync(fileStream);
-        //                }
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        string fileName = Path.GetFileNameWithoutExtension(item.FileName);
+                        string extension = Path.GetExtension(item.FileName);
+                        string pathUrl = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        @event.LogoUrl = pathUrl;
+                        photoEvent.PathUrl = pathUrl;
+                        photosEvent.Add(new Images { PathUrl = pathUrl });
+                        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await item.CopyToAsync(fileStream);
+                        }
 
-        //            }
+                    }
 
-        //            _context.Update(@event);
+                    _context.Update(@event);
 
-        //            var previousIdFromDataBase = id;
-        //            foreach (var item in photosEvent)
-        //            {
-        //                item.IdEvent = previousIdFromDataBase;
-
-
-        //            }
-        //            _context.Image.AddRange(photosEvent);
-        //            await _context.SaveChangesAsync();
-        //        }
+                    var previousIdFromDataBase = id;
+                    foreach (var item in photosEvent)
+                    {
+                        item.IdEvent = previousIdFromDataBase;
 
 
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    return View(@event);
-        //}
+                    }
+                    _context.Image.AddRange(photosEvent);
+                    await _context.SaveChangesAsync();
+                }
+
+
+                return RedirectToAction("Index", "Home");
+            }
+            return View(@event);
+        }
 
         public IActionResult Privacy()
         {

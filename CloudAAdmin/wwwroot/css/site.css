@@ -27,11 +27,12 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 12px;
+  
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 
@@ -59,8 +60,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #f2f5f9;
 }
 .footer {
   position: absolute;
@@ -74,7 +76,9 @@ body {
 
 
 /*Own classes*/
-
+.row{
+    margin: 0;
+}
 .container{
    max-width: 1400px;
 }
@@ -82,7 +86,9 @@ body {
     min-width:80px;
 }
 .card {
-    background-color: #e9ecef;
+    background-color: white;
+    border-radius: 15px;
+    border-color: none;
 }
 .titleAdmin {
     /*padding: .75rem 1.25rem;*/
@@ -95,8 +101,6 @@ body {
 .body-titleAdmin {
     display: flex;
     padding: 0;
-    margin-right: -15px;
-    margin-left: -15px;
     background-color: #e9ecef;
     border-bottom: 1px solid rgba(0,0,0,.125);
     border-left: 1px solid rgba(0,0,0,.125);
@@ -110,5 +114,40 @@ body {
 .img-admin.modal{
     max-height: 600px;
     max-width: 800px;
+}
+.collapsible {
+    cursor: pointer;
+    padding: 5px;
+    width: 10%;
+    border-radius: 15px;
+    border-color: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    color: white;
+}
+.btn-link-own {
+    margin-top:5px;
+    width: 30%;
+}
+
+.btn-sm {
+    border-radius: 15px;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+ 
+
+.table-style {
+    border-radius: 15px;
+    background-color: white;
+    position:relative;
+    border:none;
 }
 

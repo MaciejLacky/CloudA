@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudA.Data.Migrations
 {
     [DbContext(typeof(CloudAContext))]
-    [Migration("20210319172428_m4")]
-    partial class m4
+    [Migration("20210322190708_InitializeCreate")]
+    partial class InitializeCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,6 +67,29 @@ namespace CloudA.Data.Migrations
                     b.ToTable("Client");
                 });
 
+            modelBuilder.Entity("CloudA.Data.Data.Images", b =>
+                {
+                    b.Property<int>("IdImages")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EventIdEvent")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEvent")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PathUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdImages");
+
+                    b.HasIndex("EventIdEvent");
+
+                    b.ToTable("Image");
+                });
+
             modelBuilder.Entity("CloudA.Data.Event", b =>
                 {
                     b.Property<int>("IdEvent")
@@ -119,9 +142,20 @@ namespace CloudA.Data.Migrations
                     b.Navigation("Event");
                 });
 
+            modelBuilder.Entity("CloudA.Data.Data.Images", b =>
+                {
+                    b.HasOne("CloudA.Data.Event", "Event")
+                        .WithMany("Images")
+                        .HasForeignKey("EventIdEvent");
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("CloudA.Data.Event", b =>
                 {
                     b.Navigation("Clients");
+
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

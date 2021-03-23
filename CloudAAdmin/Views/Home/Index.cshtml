@@ -2,41 +2,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="card  " style="margin-left:-15px; margin-right:-15px ">
-    <div class="card-body">
-        <div class="card-text">
-            <form asp-action="Index">
-                <div class="row">
-                    <div class="card col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">Wyszukaj po nazwie</label>
-                            <input name="searchTerm" class="form-control" />
-                            <label class="control-label">Wyszukaj po liczba uczestników</label>
-                            <input name="NumOfPeople" class="form-control" />
 
-                            <label class="control-label ml-3" for="IsChange">
-                                <input class="form-check-input " id="IsChange" type="checkbox" name="isDateChange" value="true" />
-                                <input class="form-check-input " id="IsChange" type="hidden" name="isDateChange" value="false" />
-                                Wyszukaj po data od:
-                            </label>
-                            <input name="dateFrom" class="form-control" type="datetime-local" />
-
-                        </div>
-                        <div class="form-group ">
-
-                            <input type="submit" value="Szukaj" class="btn btn-secondary btn-sm float-right  " />
-
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="row"> 
-     @await Html.PartialAsync("Events", (IEnumerable<CloudA.Data.Event>)ViewBag.ModelEvents)
-</div>
+    @await Html.PartialAsync("Events", (IEnumerable<CloudA.Data.Event>)ViewBag.ModelEvents)
 
 
-   
+
+
 

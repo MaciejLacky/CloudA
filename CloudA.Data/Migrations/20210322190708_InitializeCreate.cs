@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CloudA.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitializeCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +20,8 @@ namespace CloudA.Data.Migrations
                     DateTo = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsRegister = table.Column<bool>(type: "bit", nullable: false),
                     LogoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaxNumOfPeople = table.Column<int>(type: "int", nullable: false),
+                    NumOfRegistered = table.Column<int>(type: "int", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -55,9 +56,35 @@ namespace CloudA.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Image",
+                columns: table => new
+                {
+                    IdImages = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PathUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdEvent = table.Column<int>(type: "int", nullable: false),
+                    EventIdEvent = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Image", x => x.IdImages);
+                    table.ForeignKey(
+                        name: "FK_Image_Event_EventIdEvent",
+                        column: x => x.EventIdEvent,
+                        principalTable: "Event",
+                        principalColumn: "IdEvent",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Client_EventIdEvent",
                 table: "Client",
+                column: "EventIdEvent");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Image_EventIdEvent",
+                table: "Image",
                 column: "EventIdEvent");
         }
 
@@ -65,6 +92,9 @@ namespace CloudA.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Client");
+
+            migrationBuilder.DropTable(
+                name: "Image");
 
             migrationBuilder.DropTable(
                 name: "Event");
