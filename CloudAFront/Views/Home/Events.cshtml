@@ -4,34 +4,37 @@
 
 @foreach (var item in Model)
 {
-<div class="card shadow mb-5">
-    <div class="card border-light  ">
-        <div class="card-header text-uppercase text-secondary">
-            <h2 class="p-2">
-                @Html.DisplayFor(modelItem => item.TitlePL)
-
-                @Html.DisplayFor(modelItem => item.TitleEng)
-
-                @Html.DisplayFor(modelItem => item.TitleRos)
-
-            </h2>
-        </div>
-        <div class="card-body">
-
-            <img class="img-front-list img-fluid float-left mr-3 mb-3 rounded" src="/Image/@item.LogoUrl" asp-append-version="true">
-            <p class="card-text p-2"> @Html.DisplayFor(modelItem => item.Content)</p>
-
-        </div>
-        <h4 class="card-title">
-            <small class="p-4">Zaczynamy:  </small> @Html.DisplayFor(modelItem => item.DateFrom)
-            <br />
-            <small class="p-4">Koniec:  </small>  @Html.DisplayFor(modelItem => item.DateTo)
-        </h4>
-        <div class="card-footer">
-            <a class="btn btn-primary btn-lg rounded float-right mr-3" asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a>
+    <div class="flip-card shadow mb-3">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="card-title text-left pl-3 pt-2">
+                            <h2> @Html.DisplayFor(modelItem => item.TitlePL)</h2><br />
+                            <blockquote> @Html.DisplayFor(modelItem => item.TitleEng)</blockquote>
+                        </div>
+                        <div class="card-body p-0">
+                            <h4><small>Zaczynamy od:  </small> @Html.DisplayFor(modelItem => item.DateFrom) </h4><br />
+                            <h4><small>Kończymy już:  </small> @Html.DisplayFor(modelItem => item.DateTo) </h4>
+                        </div>
+                        
+                      
+                        
+                       
+                    </div>
+                    <div class="col-4">
+                        <img src="/Image/@item.LogoUrl" asp-append-version="true" style=" width:100%;height:200px; border-radius:15px">
+                      
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card-back p-4">
+               
+                <p> @Html.DisplayFor(modelItem => item.Content)</p>
+                <a class="btn btn-first rounded float-right mr-3" asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a>
+            </div>
         </div>
     </div>
-</div>
-
 }
+
 

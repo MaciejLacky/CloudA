@@ -41,6 +41,7 @@ var i;
 for (i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function () {
         this.classList.toggle("active");
+
         var content = this.nextElementSibling;
         if (content.style.display === "block") {
             content.style.display = "none";
@@ -48,4 +49,15 @@ for (i = 0; i < coll.length; i++) {
             content.style.display = "block";
         }
     });
+}
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("navbar").style.padding = "30px 10px";
+        document.getElementById("logo").style.fontSize = "25px";
+    } else {
+        document.getElementById("navbar").style.padding = "80px 10px";
+        document.getElementById("logo").style.fontSize = "35px";
+    }
 }

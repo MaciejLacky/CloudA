@@ -3,7 +3,7 @@
 
     <div class="row">
         <div class="col-md-12 float-md-left">
-            <button type="button" class="collapsible btn ">Filtruj</button>
+            <button type="button" class="collapsible btn ml-3 "><span><i class="fas fa-filter"></i> Filtruj</span></button>
             <div class="content">
                 <form asp-action="Index">
                     <div class="card shadow ">
@@ -29,11 +29,13 @@
                     </div>
                 </form>
             </div>
-            <div class="row adminMenuBar">
-                <div class=" mb-3 my-2 ">
-                    <a class="btn-first btn btn-link-own  " asp-controller="Event" asp-action="Create">Dodaj</a>
-                    <a class="btn-first btn btn-link-own " asp-controller="Event" asp-action="Create">Dodaj</a>
-                    <a class="btn-first btn btn-link-own  " asp-controller="Event" asp-action="Create">Dodaj</a>
+            <div class="row ml-3 ">
+                <div class="icon-bar mt-3 mb-3">
+                    <a class="active" asp-controller="Event" asp-action="Create"><i class="fa fa-plus"></i></a>
+                    <a asp-controller="Home" asp-action="Index"><i class="fa fa-refresh"></i></a>
+                    <a asp-controller="Home" asp-action="Index"><i class="fa fa-envelope"></i></a>
+                    <a asp-controller="Home" asp-action="Index"><i class="fa fa-globe"></i></a>
+                    <a asp-controller="Home" asp-action="Index"><i class="fa fa-trash"></i></a>
                 </div>
                 
             </div>
