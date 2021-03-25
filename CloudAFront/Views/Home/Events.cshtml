@@ -4,37 +4,42 @@
 
 @foreach (var item in Model)
 {
-    <div class="flip-card shadow mb-3">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="card-title text-left pl-3 pt-2">
-                            <h2> @Html.DisplayFor(modelItem => item.TitlePL)</h2><br />
-                            <blockquote> @Html.DisplayFor(modelItem => item.TitleEng)</blockquote>
-                        </div>
-                        <div class="card-body p-0">
-                            <h4><small>Zaczynamy od:  </small> @Html.DisplayFor(modelItem => item.DateFrom) </h4><br />
-                            <h4><small>Kończymy już:  </small> @Html.DisplayFor(modelItem => item.DateTo) </h4>
-                        </div>
-                        
-                      
-                        
-                       
-                    </div>
-                    <div class="col-4">
-                        <img src="/Image/@item.LogoUrl" asp-append-version="true" style=" width:100%;height:200px; border-radius:15px">
-                      
+<div class="card-front shadow mb-3">
+
+    <div class="row">
+        <div class="col-8">
+            <div class=" text-left pl-3 pt-2">
+                <h2 class="seq"><strong>@Html.DisplayFor(modelItem => item.TitlePL)</strong> </h2><br />
+                <h4>   @Html.DisplayFor(modelItem => item.TitleEng)</h4>
+            </div>
+           
+
+        </div>
+        <div class="col-4">
+            <div class="img-front-card">
+                <img src="/Image/@item.LogoUrl" asp-append-version="true" style=" width:100%;height:200px; border-radius:15px">
+                <div class="btn-block-front">
+                    <a class="btn  glow-on-hover rounded seq mr-3" style="width:auto" asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a>
+                    
+                </div>
+                <div class="block-front-main">
+                   
+                </div>
+                <div class="block-front-second">
+
+                </div>
+                <div class="block-front-main-third">
+                    <div class="p-3 text-center">
+                        <h5> <small class="text-muted">start:</small> <strong>@Html.DisplayFor(modelItem => item.DateFrom)</strong> </h5><br />
+                        <h5> <small class="text-muted">koniec: </small> <strong>@Html.DisplayFor(modelItem => item.DateTo)  </strong> </h5>
                     </div>
                 </div>
             </div>
-            <div class="flip-card-back p-4">
-               
-                <p> @Html.DisplayFor(modelItem => item.Content)</p>
-                <a class="btn btn-first rounded float-right mr-3" asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a>
-            </div>
+
         </div>
     </div>
+
+</div>
 }
 
 

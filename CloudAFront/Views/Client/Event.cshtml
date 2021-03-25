@@ -1,28 +1,27 @@
 ﻿@model CloudA.Data.Event
 
-<div class="card shadow ">
-    <div class="card border-light  ">
-        <div class="card-header text-uppercase text-secondary">
-            <h2 class="p-2">
+<div class="card-front-form ">
+   
+        <div class="text-dark">
+            <h4 class="p-2">
                 @Html.DisplayFor(modelItem => Model.TitlePL)
 
                 @Html.DisplayFor(modelItem => Model.TitleEng)
 
                 @Html.DisplayFor(modelItem => Model.TitleRos)
 
-            </h2>
+            </h4>
         </div>
-        <div class="card-body">
+        <div class="p-2">
 
             <img class="img-front-list img-fluid float-left mr-3 mb-3 rounded" src="/Image/@Model.LogoUrl" asp-append-version="true">
-            <p class="card-text p-2"> @Html.DisplayFor(modelItem => Model.Content)</p>
+            <p class="lead text-left "> @Html.DisplayFor(modelItem => Model.Content)</p>
 
         </div>
-        <h4 class="card-title">
-            <small class="p-4">Zaczynamy:  </small> @Html.DisplayFor(modelItem => Model.DateFrom)
-            <br />
+        <h4 >
+            <small class="p-4">Zaczynamy:  </small> @Html.DisplayFor(modelItem => Model.DateFrom) <br />
             <small class="p-4">Koniec:  </small>  @Html.DisplayFor(modelItem => Model.DateTo)
         </h4>       
-    </div>
+    
 </div>
 

@@ -27,11 +27,13 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 12px;
+  font-size: 10px;
+ 
 }
 @media (min-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: 12px;
+   
   }
 }
 
@@ -62,6 +64,9 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     background-color: #F5F5F5;
+    font-size: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   
 }
 .footer {
   position: absolute;
@@ -77,7 +82,7 @@ body {
     
 }
 .container-home{
-    margin-top:-400px;
+    margin-top:150px;
 }
 
 .btn {
@@ -88,8 +93,21 @@ body {
     max-width: 250px;
     max-height: 200px;
 }
-.card {
-    border-radius: 5px;
+.card-front {
+    border-radius: 10px;
+    z-index: 1;
+    backdrop-filter: blur(40px);
+    border: solid 2px transparent;
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+.card-front-form {
+    border-radius: 10px;
+    z-index: 1;
+    backdrop-filter: blur(40px);
+    border: solid 2px transparent;
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
 }
 .titleFront {
     padding: .75rem 1.25rem;
@@ -178,63 +196,85 @@ body {
     }
 }
 
-/*jumbotron main page*/
-.jumbotron{
-    min-height:500px;
-}
-.jumbotron-main {
-    margin-top: 60px;
-    background-image: url('../Image/4884517.jpg');
-    background-size: auto;
-    background-repeat: no-repeat;
-}
 
-/*Flip cards style*/
-.flip-card {
-    background-color: transparent;
-    width: 100%;
-    height: 200px;
-    perspective: 1000px;
-    border-radius: 15px;
-}
 
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border-radius: 15px;
-}
 
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-.flip-card-front {
-    background-color: white;
-    color: black;
-    border-radius: 15px;
-}
-
-.flip-card-back {
-    background-color: #FFC107;
-    color: white;
-    transform: rotateY(180deg);
-    border-radius: 15px;
-}
 
 /*Buttons*/
+
+
+
+.glow-on-hover {
+    width: 250px;
+    height: 40px;
+   
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    background: #FF8F00;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+    .glow-on-hover:before {
+        content: '';
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        border-radius: 10px;
+    }
+
+    .glow-on-hover:active {
+        color: #000
+    }
+
+        .glow-on-hover:active:after {
+            background: transparent;
+        }
+
+    .glow-on-hover:hover:before {
+        opacity: 1;
+    }
+
+    .glow-on-hover:after {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #FF8F00;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+    }
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+
 .btn-first {
     cursor: pointer;
     padding: 5px;
@@ -248,6 +288,7 @@ body {
     background-color: #3F51B5;
     transition: 0.5s ease;
 }
+
 /*boximage*/
 .container-box-image {
     position: relative;
@@ -266,3 +307,67 @@ body {
     background-color: #FFC107;
     border-radius: 5px;
 }
+
+.img-front-card {
+    position: relative;
+}
+.btn-block-front {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.block-front-main {
+    position: absolute;
+    bottom: 10px;
+    left: -100px;
+    background-color: #FF8F00;
+    width: 223px;
+    height: 83px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    z-index: 20;
+}
+.block-front-second {
+    position: absolute;
+    bottom: 10px;
+    left: -50px;
+    width:180px;
+    height: 90px;
+    background-color: #3F51B5;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    z-index:19;
+}
+.block-front-main-third {
+    position: absolute;
+    bottom: 10px;
+    left: -140px;
+    width: 255px;
+    height: 75px;
+    background-color: #E0E0E0;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    z-index: 21;
+}
+    .block-front-main-third:hover {
+        background-color: #FF8F00;
+        transition: 0.5s  ease-in-out;
+    }
+
+    .parallax {
+        /* The image used */
+        background-image: url('../Image/4884517.jpg');
+        /* Set a specific height */
+        min-height: 500px;
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+
