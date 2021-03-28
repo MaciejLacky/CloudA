@@ -369,5 +369,6 @@ body {
         background-repeat: no-repeat;
         background-size: cover;
     }
-
-
+ .form-control{
+     border-radius:5px;
+ }
