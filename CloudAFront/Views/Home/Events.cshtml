@@ -17,9 +17,9 @@
         </div>
         <div class="col-4">
             <div class="img-front-card">
-                <img src="/Image/@item.LogoUrl" asp-append-version="true" style=" width:100%;height:200px; border-radius:15px">
+                <img class="img-front-main-list" src="/Image/@item.LogoUrl" asp-append-version="true">
                 <div class="btn-block-front">
-                    <a class="btn  glow-on-hover rounded seq mr-3" style="width:auto" asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a>
+                    <a class="btn btn-first-img p-2 seq mr-3 " style="width:auto" asp-area="" asp-controller="Client" asp-action="Create" asp-route-id="@item.IdEvent">Zarejestruj się</a>
                     
                 </div>
                 <div class="block-front-main">
@@ -30,8 +30,8 @@
                 </div>
                 <div class="block-front-main-third">
                     <div class="p-3 text-center">
-                        <h5> <small class="text-muted">start:</small> <strong>@Html.DisplayFor(modelItem => item.DateFrom)</strong> </h5><br />
-                        <h5> <small class="text-muted">koniec: </small> <strong>@Html.DisplayFor(modelItem => item.DateTo)  </strong> </h5>
+                        <h5> <small>start:</small> <strong>@Html.DisplayFor(modelItem => item.DateFrom)</strong> </h5><br />
+                        <h5> <small>koniec: </small> <strong>@Html.DisplayFor(modelItem => item.DateTo)  </strong> </h5>
                     </div>
                 </div>
             </div>
